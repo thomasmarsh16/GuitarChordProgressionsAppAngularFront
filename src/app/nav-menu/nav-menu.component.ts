@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SocialUser } from "angularx-social-login";
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { GoogleauthService } from '../services/google-auth.service';
+import { faGuitar } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-nav-menu',
@@ -14,6 +16,7 @@ export class NavMenuComponent implements OnInit {
   user: SocialUser;
   loggedIn: boolean;
   faGoogleIcon = faGoogle;
+  faGuitarIcon = faGuitar;
 
   constructor(private googleAuth: GoogleauthService) { }
 
