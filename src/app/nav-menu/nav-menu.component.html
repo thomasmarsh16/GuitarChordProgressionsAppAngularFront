@@ -10,11 +10,11 @@
         <img width="40" class="img-profile rounded-circle" src="{{user.photoUrl}}">
         
         <button mat-button  [matMenuTriggerFor]="menu" aria-label="User Dropdown Options">
-            <mat-icon class="notranslate material-icons mat-icon-no-color" >menu</mat-icon>
+            <mat-icon mat-icon >menu</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item  (click)="signOutWithGoogle()">
-                <mat-icon class="notranslate material-icons mat-icon-no-color">voicemail</mat-icon>
+                <mat-icon mat-icon >login</mat-icon>
                 <span>Sign Out</span>
             </button>
         </mat-menu>
