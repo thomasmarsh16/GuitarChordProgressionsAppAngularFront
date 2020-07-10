@@ -12,12 +12,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule  } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { ChordPickerComponent } from './chord-picker/chord-picker.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    ChordPickerComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,11 @@ import { MatButtonModule  } from '@angular/material/button';
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    RouterModule.forRoot([
+      { path: '', component: ChordPickerComponent, pathMatch: 'full' }
+    ])
   ],
   providers: [
     {
