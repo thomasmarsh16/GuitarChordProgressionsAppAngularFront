@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChordPickerComponent } from './chord-picker.component';
+import { GuitarChordPageComponent } from './guitar-chord-page.component';
 
-describe('ChordPickerComponent', () => {
-  let component: ChordPickerComponent;
-  let fixture: ComponentFixture<ChordPickerComponent>;
+describe('GuitarChordPageComponent', () => {
+  let component: GuitarChordPageComponent;
+  let fixture: ComponentFixture<GuitarChordPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChordPickerComponent ]
+      declarations: [ GuitarChordPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChordPickerComponent);
+    fixture = TestBed.createComponent(GuitarChordPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

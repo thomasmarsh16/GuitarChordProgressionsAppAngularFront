@@ -14,14 +14,17 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { ChordPickerComponent } from './chord-picker/chord-picker.component';
+import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
+import { DialogCardComponent } from './dialog-card/dialog-card.component';
+import { GuitarChordPageComponent } from './guitar-chord-page/guitar-chord-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    ChordPickerComponent
+    DialogCardComponent,
+    GuitarChordPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,8 +37,9 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
+    MatListModule,
     RouterModule.forRoot([
-      { path: '', component: ChordPickerComponent, pathMatch: 'full' }
+      { path: '', component: GuitarChordPageComponent, pathMatch: 'full' }
     ])
   ],
   providers: [
