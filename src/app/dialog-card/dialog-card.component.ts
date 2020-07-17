@@ -8,30 +8,29 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class DialogCardComponent implements OnInit {
 
   @Input() cardTitle: string;
-  questions: string[];
-  questionCategory: string[];
-  questionOptionMap: Map<string,string[]>;
-  numberTest: string;
 
-  @Output() choicesMade: string[];
+  @Input() questions: string[] = [];
+  @Input() questionCategory: string[] = [];
+  @Input() questionOptionMap: Map<string,string[]> = new Map([]);
+
+  choicesMade: string[];
+
+  @Output() choicesChange = new EventEmitter<any[]>();
 
   currentQuestion: string;
   currentOptions: string[];
   questionIndex: number;
 
   constructor() {
+  }
+
+  ngOnInit(): void {
     this.questionIndex = 0;
-    this.questions = ["Pick a genre", "Pick a key", "Pick a chord progression"];
-    this.questionCategory = ["genre","key","progression"]
-    this.questionOptionMap = new Map([["genre", ["Jazz","Rock","Latin"]], ["key",["A","B","C"]], ["progression",["I-VI-V","I-IV-V"]]]);
 
     this.choicesMade = new Array<string>(this.questions.length);
 
     this.currentQuestion = this.questions[0];
     this.currentOptions = this.questionOptionMap.get("genre");
-  }
-
-  ngOnInit(): void {
   }
 
   nextQuestion(value: string) 
@@ -45,13 +44,17 @@ export class DialogCardComponent implements OnInit {
       this.questionIndex += 1;
     }
 
-    // update
+    // update questions
     this.updateQuestionandOptions();
+
 
   }
 
   previousQuestion() 
-  {  
+  { 
+    // undo last choice
+    this.choicesMade.pop();
+
     if ( this.questionIndex != 0 ){
       this.questionIndex -= 1;
     }
@@ -67,6 +70,7 @@ export class DialogCardComponent implements OnInit {
     // update options
     this.currentOptions = this.questionOptionMap.get(this.questionCategory[this.questionIndex]);
 
-    this.numberTest = this.questionCategory[this.questionIndex];
+    // output choice changes
+    this.choicesChange.emit(this.choicesMade);
   }
 }

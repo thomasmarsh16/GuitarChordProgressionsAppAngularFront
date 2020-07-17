@@ -7,13 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuitarChordPageComponent implements OnInit {
 
-  public chordCardTitle: string;
+  chordCardTitle: string;
+  questionOptions: string[];
+  questionCategories: string[];
+  optionMap: Map<string,string[]>
+
+  chordFilters: string[];
 
   constructor() { 
     this.chordCardTitle = "Pick your chord progression";
+    
+    this.questionCategories = ["genre","key","progression"];
+    this.questionOptions = ["Pick a genre", "Pick a key", "Pick a chord progression"];
+    this.optionMap = new Map([["genre", ["Jazz","Rock","Latin"]], ["key",["A","B","C"]], ["progression",["I-VI-V","I-IV-V"]]]);
   }
 
   ngOnInit(): void {
   }
 
+  updateChordsShown(array: any[]){
+    this.chordFilters = array;
+    console.log(this.chordFilters);
+  }
 }

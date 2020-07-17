@@ -1,19 +1,18 @@
 <mat-card class="dialog-card">
     <mat-card-header>
-        <mat-card-title>{{currentQuestion}}</mat-card-title>
+        <mat-card-title>{{cardTitle}}</mat-card-title>
+        <mat-card-subtitle>{{currentQuestion}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        
+        <button class="card-button" mat-raised-button (click)="previousQuestion()" color="primary">Previous Question</button>
         <mat-selection-list #options [multiple]="false">
             <mat-list-option *ngFor="let option of currentOptions" [value]="option" (click)="nextQuestion(options.selectedOptions.selected[0]?.value)">
                 {{option}}
             </mat-list-option>
         </mat-selection-list>
 
-        <button class="card-button" mat-raised-button (click)="previousQuestion()" color="primary">Previous Question</button>
     </mat-card-content>
     <mat-card-footer>
         
     </mat-card-footer>
 </mat-card>
-

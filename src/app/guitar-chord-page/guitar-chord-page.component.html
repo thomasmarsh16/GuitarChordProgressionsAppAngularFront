@@ -1,1 +1,11 @@
-<app-dialog-card [cardTitle]="chordCardTitle" ></app-dialog-card>
+<app-dialog-card *ngIf="questionOptions" 
+    [cardTitle]="chordCardTitle" 
+    [questions]="questionOptions" 
+    [questionCategory]="questionCategories" 
+    [questionOptionMap]="optionMap"  (choicesChange)="updateChordsShown($event)">
+</app-dialog-card>
+
+<div *ngFor="let filter of chordFilters">
+    <p>{{filter}}</p>
+</div>
+
