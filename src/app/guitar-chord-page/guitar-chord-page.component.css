@@ -1,3 +1,30 @@
 .dialog-wide {
     margin-top: 250px;
 }
+
+.accordian-align .mat-expansion-panel-header-title,
+.accordian-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.accordian-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-icon {
+  margin-right: 3px;
+}
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-card {
+  margin-top: 2em;
+  border: 1px solid rgba(0,0,0,.2)
+}
+
+.stepper-buttons {
+  margin-top: 1em;
+}

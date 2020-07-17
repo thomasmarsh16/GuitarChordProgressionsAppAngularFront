@@ -15,9 +15,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { RouterModule } from '@angular/router';
 import { DialogCardComponent } from './dialog-card/dialog-card.component';
 import { GuitarChordPageComponent } from './guitar-chord-page/guitar-chord-page.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +43,11 @@ import { GuitarChordPageComponent } from './guitar-chord-page/guitar-chord-page.
     MatButtonModule,
     MatCardModule,
     MatListModule,
+    MatStepperModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: '', component: GuitarChordPageComponent, pathMatch: 'full' }
     ])

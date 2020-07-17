@@ -1,11 +1,64 @@
-<app-dialog-card *ngIf="questionOptions" 
-    [cardTitle]="chordCardTitle" 
-    [questions]="questionOptions" 
-    [questionCategory]="questionCategories" 
-    [questionOptionMap]="optionMap"  (choicesChange)="updateChordsShown($event)">
-</app-dialog-card>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Pick your Chords</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-vertical-stepper #stepper>
+            <mat-step>
+                <ng-template matStepLabel>{{questionOptions[0]}}</ng-template>
+                <mat-selection-list #optionsGenre>
+                    <mat-list-option *ngFor="let genreOption of optionMap.get('genre')" [value]="genreOption">
+                        {{genreOption}}
+                    </mat-list-option>
+                </mat-selection-list>
+                <div class="stepper-buttons">
+                    <button mat-raised-button color="primary" matStepperNext (click)="recordOption(optionsGenre.selectedOptions.selected?.values())">Next</button>
+                </div>
+            </mat-step>
 
-<div *ngFor="let filter of chordFilters">
-    <p>{{filter}}</p>
-</div>
+            <mat-step>
+                <ng-template matStepLabel>{{questionOptions[1]}}</ng-template>
+                <mat-selection-list #optionsKey>
+                    <mat-list-option *ngFor="let keyOption of optionMap.get('key')" [value]="keyOption">
+                        {{keyOption}}
+                    </mat-list-option>
+                </mat-selection-list>
+                <div class="stepper-buttons">
+                    <button mat-button color="primary" matStepperPrevious>Previous</button>
+                    <button mat-raised-button color="primary" matStepperNext (click)="recordOption(optionsKey.selectedOptions.selected?.values())">Next</button>
+                </div>
+            </mat-step>
 
+            <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <p>You are now done choosing.</p>
+                <div class="stepper-buttons">
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+                </div>
+              </mat-step>
+        </mat-vertical-stepper>
+    </mat-card-content>
+</mat-card>
+
+<p>{{chosenFilter}}</p>
+
+<mat-accordion class="accordian-align" multi>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Jazz</mat-panel-title>
+            <mat-panel-description>Chords for Jazz music</mat-panel-description>
+            <mat-icon>album</mat-icon>
+        </mat-expansion-panel-header>
+        <p>jazz chords</p>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Rock</mat-panel-title>
+            <mat-panel-description>Chords for Rock music</mat-panel-description>
+            <mat-icon>album</mat-icon>
+        </mat-expansion-panel-header>
+        <p>Rock chords</p>
+    </mat-expansion-panel>
+</mat-accordion>
