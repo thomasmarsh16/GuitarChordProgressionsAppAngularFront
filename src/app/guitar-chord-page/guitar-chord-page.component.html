@@ -49,7 +49,6 @@
             <mat-icon>album</mat-icon>
         </mat-expansion-panel-header>
         <p>jazz chords</p>
-        <app-guitar-chord></app-guitar-chord>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -65,3 +64,5 @@
 <div *ngFor="let filter of chosenFilter">
     <p>{{filter.value}}</p>
 </div>
+
+<app-guitar-chord *ngIf='testID' [chordID]="testID"></app-guitar-chord>
