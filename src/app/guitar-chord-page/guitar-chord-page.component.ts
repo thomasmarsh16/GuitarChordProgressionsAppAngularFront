@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { guitarChord, chordProgression } from '../chord-data/data-interfaces';
 
 @Component({
   selector: 'app-guitar-chord-page',
@@ -32,12 +33,9 @@ export class GuitarChordPageComponent implements OnInit {
 
   updateChordsShown(array: any[]){
     this.chordFilters = array;
-    console.log(this.chordFilters);
   }
 
   recordOption(filter: any[]){
     this.chosenFilter = filter;
-
-    console.log(filter);
   }
 }

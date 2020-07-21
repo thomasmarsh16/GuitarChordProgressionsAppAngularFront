@@ -20,9 +20,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 import { DialogCardComponent } from './dialog-card/dialog-card.component';
 import { GuitarChordPageComponent } from './guitar-chord-page/guitar-chord-page.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { GuitarChordComponent } from './guitar-chord/guitar-chord.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     NavMenuComponent,
     DialogCardComponent,
     GuitarChordPageComponent,
+    GuitarChordComponent,
   ],
   imports: [
     BrowserModule,
