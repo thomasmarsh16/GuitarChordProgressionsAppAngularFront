@@ -1,7 +1,7 @@
 export interface guitarChord {
     note: string;
-    BaseFret: number;
-    fingerPlacements: string [];
+    baseFret: number;
+    fingerPlacements: number [];
 }
 
 export interface chordProgression {

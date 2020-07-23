@@ -20,8 +20,6 @@ export class GuitarChordPageComponent implements OnInit {
   chordFilters: string[];
   chosenFilter: any[] = [];
 
-  testID = 'chord1';
-
   constructor(private _formBuilder: FormBuilder) { 
     this.chordCardTitle = "Pick your chord progression";
     

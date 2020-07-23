@@ -41,6 +41,8 @@
     </mat-card-content>
 </mat-card>
 
+<app-guitar-chord></app-guitar-chord>
+
 <mat-accordion class="accordian-align" multi>
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -49,6 +51,7 @@
             <mat-icon>album</mat-icon>
         </mat-expansion-panel-header>
         <p>jazz chords</p>
+        
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -65,4 +68,4 @@
     <p>{{filter.value}}</p>
 </div>
 
-<app-guitar-chord *ngIf='testID' [chordID]="testID"></app-guitar-chord>
+
