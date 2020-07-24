@@ -21,10 +21,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { DialogCardComponent } from './dialog-card/dialog-card.component';
 import { GuitarChordPageComponent } from './guitar-chord-page/guitar-chord-page.component';
 import { GuitarChordComponent } from './guitar-chord/guitar-chord.component';
+import { ChordProgressionComponent } from './chord-progression/chord-progression.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { GuitarChordComponent } from './guitar-chord/guitar-chord.component';
     DialogCardComponent,
     GuitarChordPageComponent,
     GuitarChordComponent,
+    ChordProgressionComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ import { GuitarChordComponent } from './guitar-chord/guitar-chord.component';
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
+    FlexLayoutModule,
     RouterModule.forRoot([
       { path: '', component: GuitarChordPageComponent, pathMatch: 'full' }
     ])

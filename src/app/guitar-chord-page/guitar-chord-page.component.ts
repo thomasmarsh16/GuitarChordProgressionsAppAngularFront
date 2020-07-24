@@ -20,12 +20,42 @@ export class GuitarChordPageComponent implements OnInit {
   chordFilters: string[];
   chosenFilter: any[] = [];
 
+  testProgression: chordProgression = {
+    genre: "latin",
+    key: "F",
+    progressionStructure: "I-VI-V-I",
+    chords: [ { note:"F major",
+                barre: true,
+                barreStart: 0,
+                baseFret: 1,
+                fingerPlacements: [0,3,3,2,0,0]
+              },
+              {note:"A minor",
+              barre: false,
+              barreStart: 1,
+              baseFret: 1,
+              fingerPlacements: [-1,0,2,2,1,0]},
+              {note:"E minor",
+              barre: false,
+              barreStart: 1,
+              baseFret: 1,
+              fingerPlacements: [0,2,2,0,0,0]},
+              { note:"F major",
+                barre: true,
+                barreStart: 0,
+                baseFret: 1,
+                fingerPlacements: [0,3,3,2,0,0]
+              }
+            ]
+  };
+
   constructor(private _formBuilder: FormBuilder) { 
     this.chordCardTitle = "Pick your chord progression";
     
     this.questionCategories = ["genre","key","progression"];
     this.questionOptions = ["Pick a genre", "Pick a key", "Pick a chord progression"];
     this.optionMap = new Map([["genre", ["Jazz","Rock","Latin"]], ["key",["A","B","C"]], ["progression",["I-VI-V","I-IV-V"]]]);
+
   }
 
   ngOnInit(): void {

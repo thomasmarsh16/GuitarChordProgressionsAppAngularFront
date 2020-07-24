@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title> {{progression.progressionStructure}} progression</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+            <div fxLayout="row wrap" >
+                <div *ngFor="let chord of progression.chords" >
+                    <app-guitar-chord [chordData]="chord"></app-guitar-chord>
+                </div>
+            </div>
+    </mat-card-content>
+</mat-card>
