@@ -43,14 +43,16 @@
 
 <p *ngIf="!chordProgressions"><em>No progressions so far ...</em></p>
 
-<div *ngFor="let progressionInstance of chordProgressions">
-    <app-chord-progression [progression]="progressionInstance"></app-chord-progression>
-</div>
+<mat-accordion class="accordian-align">
+    <div *ngFor="let progressionInstance of chordProgressions">
 
-<div *ngFor="let filter of chosenFilter.genresChosen">
-    <p>{{filter.value}}</p>
-</div>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{progressionInstance.genre}} chords</mat-panel-title>
+                <mat-icon>album</mat-icon>
+            </mat-expansion-panel-header>
+            <app-chord-progression [progression]="progressionInstance"></app-chord-progression>
+        </mat-expansion-panel>
 
-<div *ngFor="let filter of chosenFilter.keysChosen">
-    <p>{{filter.value}}</p>
-</div>
+    </div>
+</mat-accordion>

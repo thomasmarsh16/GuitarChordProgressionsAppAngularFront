@@ -19,6 +19,6 @@ export interface progressionOptions {
 }
 
 export interface chosenOptions {
-    genresChosen: string [];
-    keysChosen: string [];
+    genresChosen: any [];
+    keysChosen: any [];
 }

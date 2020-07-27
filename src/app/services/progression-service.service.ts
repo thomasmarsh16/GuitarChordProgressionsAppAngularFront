@@ -21,8 +21,8 @@ export class ProgressionServiceService {
     }
    }
 
-   public getProgressions() {
-    return this.httpClient.get<chordProgression[]>('https://localhost:44377/ChordProgressions/chords');
+   public getProgressions(genreParam: string, keyParam: string) {
+    return this.httpClient.get<chordProgression[]>('https://localhost:44377/ChordProgressions/chords?' + genreParam + keyParam);
    }
 
    public getProgressionOptions() {

@@ -49,7 +49,17 @@ export class GuitarChordPageComponent implements OnInit {
 
   getProgressions()
   {
-    this.progressionApi.getProgressions().subscribe(
+    let genreParams = "";
+    let keyParams = "";
+    this.chosenFilter.genresChosen.forEach(genre => {
+      genreParams += "genre=" + genre.value + "&";
+    });
+
+    this.chosenFilter.keysChosen.forEach(key => {
+      keyParams += "key=" + key.value + "&";
+    })
+    
+    this.progressionApi.getProgressions( genreParams, keyParams).subscribe(
       chordProgressions => this.chordProgressions = chordProgressions
     );
   }
