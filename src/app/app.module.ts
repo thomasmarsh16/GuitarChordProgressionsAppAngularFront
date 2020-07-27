@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -55,6 +56,7 @@ import { ChordProgressionComponent } from './chord-progression/chord-progression
     ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: GuitarChordPageComponent, pathMatch: 'full' }
     ])
