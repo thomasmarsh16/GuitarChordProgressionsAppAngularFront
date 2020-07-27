@@ -9,11 +9,16 @@ import { guitarChord, chordProgression } from '../chord-data/data-interfaces';
 export class ChordProgressionComponent implements OnInit {
 
   @Input()
-  progression: chordProgression; 
+  progression: chordProgression = {genre: "", key: "", progressionStructure: "", chords: []}; 
 
-  constructor() { }
+  structureNumerals: string[];
+
+  constructor() 
+  { 
+  }
 
   ngOnInit(): void {
+    this.structureNumerals = this.progression.progressionStructure.split('-');
   }
 
 }

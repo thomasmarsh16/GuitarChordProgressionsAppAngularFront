@@ -16,6 +16,9 @@ export class GuitarChordComponent implements OnInit {
   @Input()
   chordData : guitarChord;
 
+  @Input()
+  chordPosition : string;
+
   constructor(private elRef: ElementRef) { 
     this.hostElement = this.elRef.nativeElement;
   }
@@ -140,9 +143,7 @@ export class GuitarChordComponent implements OnInit {
         {
           drawFingerFunction(value, index);
         }
-
       }
-
     } );
 
     // draw fret numbers on the side
@@ -161,6 +162,6 @@ export class GuitarChordComponent implements OnInit {
         .attr('y', 13 )
         .attr('stroke', 'black')
         .style('font-size', "17px")
-        .text('Chord: ' + this.chordData.note)
+        .text('( ' + this.chordPosition + ' ) ' + this.chordData.note)
   }
 }
