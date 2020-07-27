@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="progOptions">
     <mat-card-header>
         <mat-card-title>Pick your Chords</mat-card-title>
     </mat-card-header>
@@ -7,25 +7,25 @@
             <mat-step>
                 <ng-template matStepLabel>{{questionOptions[0]}}</ng-template>
                 <mat-selection-list #optionsGenre>
-                    <mat-list-option *ngFor="let genreOption of optionMap.get('genre')" [value]="genreOption">
+                    <mat-list-option *ngFor="let genreOption of progOptions.genres" [value]="genreOption">
                         {{genreOption}}
                     </mat-list-option>
                 </mat-selection-list>
                 <div class="stepper-buttons">
-                    <button mat-raised-button color="primary" matStepperNext (click)="recordOption(optionsGenre.selectedOptions.selected )">Next</button>
+                    <button mat-raised-button color="primary" matStepperNext (click)="recordOption(optionsGenre.selectedOptions.selected, 'genre' )">Next</button>
                 </div>
             </mat-step>
 
             <mat-step>
                 <ng-template matStepLabel>{{questionOptions[1]}}</ng-template>
                 <mat-selection-list #optionsKey>
-                    <mat-list-option *ngFor="let keyOption of optionMap.get('key')" [value]="keyOption">
+                    <mat-list-option *ngFor="let keyOption of progOptions.keys" [value]="keyOption">
                         {{keyOption}}
                     </mat-list-option>
                 </mat-selection-list>
                 <div class="stepper-buttons">
                     <button mat-button color="primary" matStepperPrevious>Previous</button>
-                    <button mat-raised-button color="primary" matStepperNext (click)="recordOption(optionsKey.selectedOptions.selected )">Next</button>
+                    <button mat-raised-button color="primary" matStepperNext (click)="recordOption(optionsKey.selectedOptions.selected, 'key' ); getProgressions();">Get Progressions</button>
                 </div>
             </mat-step>
 
@@ -41,12 +41,16 @@
     </mat-card-content>
 </mat-card>
 
-<p *ngIf="!chordProgressions"><em>Loading progressions...</em></p>
+<p *ngIf="!chordProgressions"><em>No progressions so far ...</em></p>
 
 <div *ngFor="let progressionInstance of chordProgressions">
     <app-chord-progression [progression]="progressionInstance"></app-chord-progression>
 </div>
 
-<div *ngFor="let filter of chosenFilter">
+<div *ngFor="let filter of chosenFilter.genresChosen">
+    <p>{{filter.value}}</p>
+</div>
+
+<div *ngFor="let filter of chosenFilter.keysChosen">
     <p>{{filter.value}}</p>
 </div>

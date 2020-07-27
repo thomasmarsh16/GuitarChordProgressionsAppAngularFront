@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { guitarChord, chordProgression } from '../chord-data/data-interfaces';
+import { guitarChord, chordProgression, progressionOptions, chosenOptions } from '../chord-data/data-interfaces';
 import { ProgressionServiceService } from '../services/progression-service.service';
 
 @Component({
@@ -13,33 +13,44 @@ export class GuitarChordPageComponent implements OnInit {
   chordCardTitle: string;
   questionOptions: string[];
   questionCategories: string[];
-  optionMap: Map<string,string[]>;
 
-  chordFilters: string[];
-  chosenFilter: any[] = [];
+  chosenFilter: chosenOptions;
 
   chordProgressions: chordProgression [];
+  progOptions: progressionOptions;
 
-  constructor(private _formBuilder: FormBuilder, private progressionApi: ProgressionServiceService) { 
-    this.chordCardTitle = "Pick your chord progression";
-    
-    this.questionCategories = ["genre","key","progression"];
-    this.questionOptions = ["Pick a genre", "Pick a key", "Pick a chord progression"];
-    this.optionMap = new Map([["genre", ["Jazz","Rock","Latin"]], ["key",["A","B","C"]], ["progression",["I-VI-V","I-IV-V"]]]);
-
-    progressionApi.getProgressions().subscribe(
-      chordProgressions => this.chordProgressions = chordProgressions
+  constructor(private _formBuilder: FormBuilder, private progressionApi: ProgressionServiceService) 
+  { 
+    this.progressionApi.getProgressionOptions().subscribe(
+      progOptions => this.progOptions = progOptions
     );
   }
 
   ngOnInit(): void {
+    this.chordCardTitle = "Pick your chord progression";
+    
+    this.questionCategories = ["genre","key"];
+    this.questionOptions = ["Pick a genre", "Pick a key"];
+
+    this.chosenFilter = { genresChosen: [""], keysChosen: [""] };
   }
 
-  updateChordsShown(array: any[]){
-    this.chordFilters = array;
+  recordOption(filter: any[], catType: string){
+
+    if ( catType == "genre")
+    {
+      this.chosenFilter.genresChosen = filter;
+    }
+    else if ( catType == "key")
+    {
+      this.chosenFilter.keysChosen = filter;
+    }
   }
 
-  recordOption(filter: any[]){
-    this.chosenFilter = filter;
+  getProgressions()
+  {
+    this.progressionApi.getProgressions().subscribe(
+      chordProgressions => this.chordProgressions = chordProgressions
+    );
   }
 }

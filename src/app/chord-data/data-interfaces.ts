@@ -12,3 +12,13 @@ export interface chordProgression {
     progressionStructure: string;
     chords: guitarChord [];
 }
+
+export interface progressionOptions {
+    genres: string [];
+    keys: string [];
+}
+
+export interface chosenOptions {
+    genresChosen: string [];
+    keysChosen: string [];
+}
