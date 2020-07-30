@@ -19,6 +19,8 @@ export class GuitarChordPageComponent implements OnInit {
   chordProgressions: chordProgression [];
   progOptions: progressionOptions;
 
+  progressionMap: Map<string, chordProgression []>;
+
   constructor(private _formBuilder: FormBuilder, private progressionApi: ProgressionServiceService) 
   { 
     this.progressionApi.getProgressionOptions().subscribe(
@@ -33,6 +35,9 @@ export class GuitarChordPageComponent implements OnInit {
     this.questionOptions = ["Pick a genre", "Pick a key"];
 
     this.chosenFilter = { genresChosen: [""], keysChosen: [""] };
+
+    this.progressionMap = new Map([]);
+    this.chordProgressions  = [];
   }
 
   recordOption(filter: any[], catType: string){
@@ -48,19 +53,34 @@ export class GuitarChordPageComponent implements OnInit {
   }
 
   getProgressions()
-  {
-    let genreParams = "";
-    let keyParams = "";
-    this.chosenFilter.genresChosen.forEach(genre => {
-      genreParams += "genre=" + genre.value + "&";
+  { 
+    this.progressionApi.getProgressions( this.chosenFilter ).subscribe(
+      chordProgressions => 
+      {
+        this.chordProgressions = chordProgressions;
+        this.progressionMap = this.groupBy(this.chordProgressions, chordProg => chordProg.genre );
+
+        console.log( this.progressionMap.size );
+      }
+    );
+  }
+
+  groupBy( progressions: chordProgression [], keyGetter ){
+    const map = new Map();
+
+    progressions.forEach((progression) => {
+      const key = keyGetter(progression);
+      const collection = map.get(key);
+
+      if (!collection) {
+        map.set(key, [progression]);
+      }
+      else
+      {
+        collection.push(progression);
+      }
     });
 
-    this.chosenFilter.keysChosen.forEach(key => {
-      keyParams += "key=" + key.value + "&";
-    })
-    
-    this.progressionApi.getProgressions( genreParams, keyParams).subscribe(
-      chordProgressions => this.chordProgressions = chordProgressions
-    );
+    return map;
   }
 }

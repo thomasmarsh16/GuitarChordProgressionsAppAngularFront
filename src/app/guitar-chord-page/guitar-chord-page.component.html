@@ -41,18 +41,29 @@
     </mat-card-content>
 </mat-card>
 
-<p *ngIf="!chordProgressions"><em>No progressions so far ...</em></p>
+<p *ngIf="progressionMap.size == 0"><em>No progressions so far ...</em></p>
 
-<mat-accordion class="accordian-align">
-    <div *ngFor="let progressionInstance of chordProgressions">
+<div *ngIf="progressionMap.size != 0" >
+    <div *ngFor="let mapKey of progressionMap.keys()">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{mapKey}} progressions</mat-card-title>
+            </mat-card-header>
+            <div *ngFor="let progressionInstance of progressionMap.get(mapKey)">
 
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>{{progressionInstance.genre}} chords</mat-panel-title>
-                <mat-icon>album</mat-icon>
-            </mat-expansion-panel-header>
-            <app-chord-progression [progression]="progressionInstance"></app-chord-progression>
-        </mat-expansion-panel>
+                    <mat-card-content>
+                        <mat-accordion class="accordian-align">
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>{{progressionInstance.progressionStructure}} progression</mat-panel-title>
+                                    <mat-icon>album</mat-icon>
+                                </mat-expansion-panel-header>
+                                <app-chord-progression [progression]="progressionInstance"></app-chord-progression>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </mat-card-content>
 
+            </div>
+        </mat-card>
     </div>
-</mat-accordion>
+</div>
