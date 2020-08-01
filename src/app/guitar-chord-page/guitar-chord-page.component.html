@@ -1,4 +1,4 @@
-<mat-card *ngIf="progOptions">
+<mat-card *ngIf="progOptions" class="expanded-margin-bottom">
     <mat-card-header>
         <mat-card-title>Pick your Chords</mat-card-title>
     </mat-card-header>
@@ -25,45 +25,52 @@
                 </mat-selection-list>
                 <div class="stepper-buttons">
                     <button mat-button color="primary" matStepperPrevious>Previous</button>
-                    <button mat-raised-button color="primary" matStepperNext (click)="recordOption(optionsKey.selectedOptions.selected, 'key' ); getProgressions();">Get Progressions</button>
+                    <button mat-raised-button color="primary" matStepperNext (click)="recordOption(optionsKey.selectedOptions.selected, 'key' )">Next</button>
                 </div>
             </mat-step>
 
             <mat-step>
                 <ng-template matStepLabel>Done</ng-template>
-                <p>Progressions can be found below!</p>
+                <p>Once get progressions has been clicked, progressions can be found below</p>
                 <div class="stepper-buttons">
                   <button mat-button matStepperPrevious>Back</button>
-                  <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+                  <button mat-raised-button color="primary" (click)="getProgressions()">Get Progressions</button>
                 </div>
               </mat-step>
         </mat-vertical-stepper>
     </mat-card-content>
 </mat-card>
 
-<p *ngIf="progressionMap.size == 0"><em>No progressions so far ...</em></p>
+<div *ngIf="chordProgressions.length > 0" class="expanded-margin-bottom">
+    <mat-accordion>
+        <div *ngFor="let genreChosen of chosenFilter.genresChosen; let indexOfitem = index">
 
-<div *ngIf="progressionMap.size != 0" >
-    <div *ngFor="let mapKey of progressionMap.keys()">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>{{mapKey}} progressions</mat-card-title>
-            </mat-card-header>
-            <div *ngFor="let progressionInstance of progressionMap.get(mapKey)">
-
-                    <mat-card-content>
-                        <mat-accordion class="accordian-align">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{genreChosen.value}} progressions</mat-panel-title>
+                    <mat-icon>album</mat-icon>
+                </mat-expansion-panel-header>
+                <div>
+                    <mat-accordion>
+                        <div *ngFor="let keyChosen of chosenFilter.keysChosen">
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header>
-                                    <mat-panel-title>{{progressionInstance.progressionStructure}} progression</mat-panel-title>
-                                    <mat-icon>album</mat-icon>
+                                    <mat-panel-title>Progressions in the key of {{keyChosen.value}}</mat-panel-title>
+                                    <mat-icon>library_music</mat-icon>
                                 </mat-expansion-panel-header>
-                                <app-chord-progression [progression]="progressionInstance"></app-chord-progression>
+        
+                                <div *ngFor="let progressionInstance of chordProgressions | filterKey: keyChosen">
+            
+                                    <div *ngIf="genreChosen.value == progressionInstance.genre">
+                                        <app-chord-progression [progression]="progressionInstance"></app-chord-progression>
+                                    </div>
+                
+                                </div>
                             </mat-expansion-panel>
-                        </mat-accordion>
-                    </mat-card-content>
-
-            </div>
-        </mat-card>
-    </div>
+                        </div>
+                    </mat-accordion>
+                </div>
+            </mat-expansion-panel>
+        </div>
+    </mat-accordion>
 </div>

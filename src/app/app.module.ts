@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
@@ -28,6 +27,8 @@ import { DialogCardComponent } from './dialog-card/dialog-card.component';
 import { GuitarChordPageComponent } from './guitar-chord-page/guitar-chord-page.component';
 import { GuitarChordComponent } from './guitar-chord/guitar-chord.component';
 import { ChordProgressionComponent } from './chord-progression/chord-progression.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { FilterKey } from './services/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ChordProgressionComponent } from './chord-progression/chord-progression
     GuitarChordPageComponent,
     GuitarChordComponent,
     ChordProgressionComponent,
+    FilterKey
   ],
   imports: [
     BrowserModule,

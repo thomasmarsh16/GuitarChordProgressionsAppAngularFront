@@ -39,4 +39,32 @@ export class ProgressionServiceService {
    public getProgressionOptions() {
     return this.httpClient.get<progressionOptions>('https://localhost:44377/ChordProgressions/options');
    }
+
+   mapGenreNoteKeys( progressions: chordProgression [], genres: string []): Map<string, string[]>
+   {
+     let genreMap = new Map<string, string []>();
+ 
+     progressions.forEach( (progressionInstance) => // loop through progressions
+     {
+       let progGenre = progressionInstance.genre;
+       let progKey = progressionInstance.key;
+ 
+       let collection = genreMap.get(progGenre);
+ 
+       if ( genreMap.has( progGenre )) // if genre has been recorded see if key has been recorded
+       {
+         if ( !genreMap.get( progGenre ).includes( progKey ) ) // if it hasn't, then record key
+         {
+           collection.push( progKey );
+         }
+       }
+       else
+       {
+         // if genre not recorded, record new genre and key
+         genreMap.set( progGenre, [progKey] );
+       }
+     });
+ 
+     return genreMap;
+   }
 }
