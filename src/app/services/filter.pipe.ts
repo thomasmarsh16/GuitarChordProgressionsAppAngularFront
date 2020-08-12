@@ -10,8 +10,39 @@ export class FilterKey implements PipeTransform {
       if(!searchKey) return items;
       
       return items.filter( prog => 
-      {
-          return searchKey.value == prog.key;
+      {  
+         if ( searchKey.value )
+         {
+            return searchKey.value == prog.key;
+         }
+         else
+         {
+            return searchKey == prog.key;
+         }
+          
       });
    }
 }
+
+@Pipe({
+   name: 'filterGenre'
+ })
+ export class FilterGenre implements PipeTransform {
+    transform(items: chordProgression[], searchGenre: any ): any[] 
+    {
+       if(!items) return [];
+       if(!searchGenre) return items;
+       
+       return items.filter( prog => 
+       {
+          if ( searchGenre.value )
+          {
+            return searchGenre.value == prog.genre;
+          }
+          else
+          {
+            return searchGenre == prog.genre;
+          }
+       });
+    }
+ }

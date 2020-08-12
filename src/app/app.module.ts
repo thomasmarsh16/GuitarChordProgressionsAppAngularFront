@@ -28,7 +28,7 @@ import { GuitarChordPageComponent } from './guitar-chord-page/guitar-chord-page.
 import { GuitarChordComponent } from './guitar-chord/guitar-chord.component';
 import { ChordProgressionComponent } from './chord-progression/chord-progression.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { FilterKey } from './services/filter.pipe';
+import { FilterKey, FilterGenre } from './services/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,8 @@ import { FilterKey } from './services/filter.pipe';
     GuitarChordPageComponent,
     GuitarChordComponent,
     ChordProgressionComponent,
-    FilterKey
+    FilterKey,
+    FilterGenre
   ],
   imports: [
     BrowserModule,

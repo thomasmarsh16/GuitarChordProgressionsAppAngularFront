@@ -1,4 +1,3 @@
-<h2>{{progression.progressionStructure}} {{progression.key}} chord progression</h2>
 <div fxLayout="row wrap" >
     <div *ngFor="let chord of progression.chords; let indexOfElement=index" >
         <app-guitar-chord *ngIf="chord" [chordData]="chord" [chordPosition]="structureNumerals[ indexOfElement ]"></app-guitar-chord>

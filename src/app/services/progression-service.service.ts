@@ -33,38 +33,46 @@ export class ProgressionServiceService {
       keyParams += "key=" + key.value + "&";
     })
 
-    return this.httpClient.get<chordProgression[]>('https://localhost:44377/ChordProgressions/chords?' + genreParams + keyParams);
+    return this.httpClient.get<chordProgression[]>('https://localhost:44377/ChordProgressions/progressions?' + genreParams + keyParams);
    }
 
    public getProgressionOptions() {
     return this.httpClient.get<progressionOptions>('https://localhost:44377/ChordProgressions/options');
    }
 
-   mapGenreNoteKeys( progressions: chordProgression [], genres: string []): Map<string, string[]>
+   public getSavedProgressions() 
    {
-     let genreMap = new Map<string, string []>();
- 
-     progressions.forEach( (progressionInstance) => // loop through progressions
+      if (this.user != null) 
+      {
+        return this.httpClient.get<chordProgression[]>('https://localhost:44377/ChordProgressions/getsavedprogressions?email=' + this.user.email);
+      }
+   }
+   
+   public saveProgressionForUser ( progressionID: number )
+   {
+     if (this.user != null)
      {
-       let progGenre = progressionInstance.genre;
-       let progKey = progressionInstance.key;
- 
-       let collection = genreMap.get(progGenre);
- 
-       if ( genreMap.has( progGenre )) // if genre has been recorded see if key has been recorded
-       {
-         if ( !genreMap.get( progGenre ).includes( progKey ) ) // if it hasn't, then record key
-         {
-           collection.push( progKey );
-         }
-       }
-       else
-       {
-         // if genre not recorded, record new genre and key
-         genreMap.set( progGenre, [progKey] );
-       }
-     });
- 
-     return genreMap;
+       const formData = new FormData();
+       formData.append("progressionID", progressionID.toString());
+       formData.append("email", this.user.email);
+
+       return this.httpClient.post<any>('https://localhost:44377/ChordProgressions/saveprogression', formData).subscribe(       
+        (res) => console.log(res),
+        (err) => /*do nothing */ err);
+     }
+   }
+
+   public removeProgressionForUser ( progressionID: number )
+   {
+     if (this.user != null)
+     {
+       const formData = new FormData();
+       formData.append("progressionID", progressionID.toString());
+       formData.append("email", this.user.email);
+
+       return this.httpClient.post<any>('https://localhost:44377/ChordProgressions/removesavedprogressions', formData).subscribe(       
+        (res) => console.log(res),
+        (err) => /*do nothing*/ err);
+     }
    }
 }

@@ -3,3 +3,16 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.limited-padding .mat-expansion-panel-body {
+    padding: 3px;
+    background: #ced9ff59;
+}
+
+.limited-padding .mat-card {
+    padding: 10px;
+}
+
+.mat-card {
+    background:  #dde2ff40;
+}

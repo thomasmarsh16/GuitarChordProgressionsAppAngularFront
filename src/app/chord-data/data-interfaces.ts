@@ -4,6 +4,7 @@ export interface guitarChord {
     fingerPlacements: number [];
     barre: boolean;
     barreStart: number;
+    chordID: number;
 }
 
 export interface chordProgression {
@@ -11,6 +12,7 @@ export interface chordProgression {
     key: string;
     progressionStructure: string;
     chords: guitarChord [];
+    progressionID: number;
 }
 
 export interface progressionOptions {

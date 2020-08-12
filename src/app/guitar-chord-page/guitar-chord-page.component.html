@@ -41,36 +41,101 @@
     </mat-card-content>
 </mat-card>
 
-<div *ngIf="chordProgressions.length > 0" class="expanded-margin-bottom">
-    <mat-accordion>
-        <div *ngFor="let genreChosen of chosenFilter.genresChosen; let indexOfitem = index">
-
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>{{genreChosen.value}} progressions</mat-panel-title>
-                    <mat-icon>album</mat-icon>
-                </mat-expansion-panel-header>
-                <div>
-                    <mat-accordion>
-                        <div *ngFor="let keyChosen of chosenFilter.keysChosen">
+<div *ngIf="user">
+        <mat-card  class="limited-padding">
+            <mat-card-header>
+                <mat-card-title>Saved Progressions</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-accordion  class="limited-padding">
+                    <div *ngFor="let genreChosen of progOptions.genres; let indexOfitem = index">
+                        <div *ngIf="(savedUserProgressions | filterGenre: genreChosen).length > 0">
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header>
-                                    <mat-panel-title>Progressions in the key of {{keyChosen.value}}</mat-panel-title>
-                                    <mat-icon>library_music</mat-icon>
+                                    <mat-panel-title>{{genreChosen}}</mat-panel-title>
+                                    <mat-icon>album</mat-icon>
                                 </mat-expansion-panel-header>
-        
-                                <div *ngFor="let progressionInstance of chordProgressions | filterKey: keyChosen">
-            
-                                    <div *ngIf="genreChosen.value == progressionInstance.genre">
-                                        <app-chord-progression [progression]="progressionInstance"></app-chord-progression>
-                                    </div>
-                
+                                <div>
+                                    <mat-accordion  class="limited-padding">
+                                        <div *ngFor="let keyChosen of progOptions.keys">
+                                            <div *ngIf="(savedUserProgressions | filterKey: keyChosen | filterGenre: genreChosen).length > 0">
+                                                <mat-expansion-panel>
+                                                    <mat-expansion-panel-header>
+                                                        <mat-panel-title>Key of {{keyChosen}}</mat-panel-title>
+                                                        <mat-icon>library_music</mat-icon>
+                                                    </mat-expansion-panel-header>
+                                                    <div>
+                                                        <mat-accordion  class="limited-padding">
+                                                            <div *ngFor="let progressionInstance of savedUserProgressions | filterKey: keyChosen | filterGenre: genreChosen">
+                                                                <mat-expansion-panel>
+                                                                    <mat-expansion-panel-header>
+                                                                        <mat-panel-title>{{progressionInstance.progressionStructure}} structure</mat-panel-title>
+                                                                        <mat-icon>radio</mat-icon>
+                                                                    </mat-expansion-panel-header>
+                                                                    <app-chord-progression [progression]="progressionInstance"></app-chord-progression>
+                                                                    <button mat-raised-button color="primary" (click)="removeProgressionForUser(progressionInstance.progressionID)">Unsave progression</button>
+                                                                </mat-expansion-panel>
+                                                            </div>
+                                                        </mat-accordion>
+                                                    </div>
+                                                </mat-expansion-panel>
+                                            </div>
+                                        </div>
+                                    </mat-accordion>
                                 </div>
                             </mat-expansion-panel>
                         </div>
-                    </mat-accordion>
+                    </div>
+                </mat-accordion>
+            </mat-card-content>
+        </mat-card>
+</div>
+
+<div *ngIf="chordProgressions.length > 0" class="expanded-margin-bottom">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Chosen Progressions</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-accordion class="limited-padding">
+                <div *ngFor="let genreChosen of chosenFilter.genresChosen; let indexOfitem = index">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{genreChosen.value}}</mat-panel-title>
+                            <mat-icon>album</mat-icon>
+                        </mat-expansion-panel-header>
+                        <div>
+                            <mat-accordion class="limited-padding">
+                                <div *ngFor="let keyChosen of chosenFilter.keysChosen">
+                                    <div *ngIf="(chordProgressions | filterKey: keyChosen | filterGenre: genreChosen).length > 0">
+                                        <mat-expansion-panel>
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title>Key of {{keyChosen.value}}</mat-panel-title>
+                                                <mat-icon>library_music</mat-icon>
+                                            </mat-expansion-panel-header>
+                                            <div>
+                                                <mat-accordion class="limited-padding">
+                                                    <div *ngFor="let progressionInstance of chordProgressions | filterKey: keyChosen | filterGenre: genreChosen">
+                                                        <mat-expansion-panel>
+                                                            <mat-expansion-panel-header>
+                                                                <mat-panel-title>{{progressionInstance.progressionStructure}} structure</mat-panel-title>
+                                                                <mat-icon>radio</mat-icon>
+                                                            </mat-expansion-panel-header>
+                                                            <app-chord-progression [progression]="progressionInstance"></app-chord-progression>
+                                                            <button mat-raised-button color="primary" (click)="saveProgressionForUser(progressionInstance.progressionID)">Save progression</button>
+                                                        </mat-expansion-panel>
+                                                    </div>
+                                                </mat-accordion>
+                                            </div>
+        
+                                        </mat-expansion-panel>
+                                    </div>
+                                </div>
+                            </mat-accordion>
+                        </div>
+                    </mat-expansion-panel>
                 </div>
-            </mat-expansion-panel>
-        </div>
-    </mat-accordion>
+            </mat-accordion>
+        </mat-card-content>
+    </mat-card>
 </div>

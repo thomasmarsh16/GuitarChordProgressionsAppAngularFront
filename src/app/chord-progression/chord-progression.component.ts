@@ -9,7 +9,7 @@ import { guitarChord, chordProgression } from '../chord-data/data-interfaces';
 export class ChordProgressionComponent implements OnInit {
 
   @Input()
-  progression: chordProgression = {genre: "", key: "", progressionStructure: "", chords: []}; 
+  progression: chordProgression = {genre: "", key: "", progressionStructure: "", chords: [], progressionID: 0}; 
 
   structureNumerals: string[];
 
