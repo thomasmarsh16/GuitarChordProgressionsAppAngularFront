@@ -33,18 +33,18 @@ export class ProgressionServiceService {
       keyParams += "key=" + key.value + "&";
     })
 
-    return this.httpClient.get<chordProgression[]>('https://localhost:44377/ChordProgressions/progressions?' + genreParams + keyParams);
+    return this.httpClient.get<chordProgression[]>('https://chordbankapi.azurewebsites.net/ChordProgressions/progressions?' + genreParams + keyParams);
    }
 
    public getProgressionOptions() {
-    return this.httpClient.get<progressionOptions>('https://localhost:44377/ChordProgressions/options');
+    return this.httpClient.get<progressionOptions>('https://chordbankapi.azurewebsites.net/ChordProgressions/options');
    }
 
    public getSavedProgressions() 
    {
       if (this.user != null) 
       {
-        return this.httpClient.get<chordProgression[]>('https://localhost:44377/ChordProgressions/getsavedprogressions?email=' + this.user.email);
+        return this.httpClient.get<chordProgression[]>('https://chordbankapi.azurewebsites.net/ChordProgressions/getsavedprogressions?email=' + this.user.email);
       }
    }
    
@@ -56,7 +56,7 @@ export class ProgressionServiceService {
        formData.append("progressionID", progressionID.toString());
        formData.append("email", this.user.email);
 
-       return this.httpClient.post<any>('https://localhost:44377/ChordProgressions/saveprogression', formData).subscribe(       
+       return this.httpClient.post<any>('https://chordbankapi.azurewebsites.net/ChordProgressions/saveprogression', formData).subscribe(       
         (res) => console.log(res),
         (err) => /*do nothing */ err);
      }
@@ -70,7 +70,7 @@ export class ProgressionServiceService {
        formData.append("progressionID", progressionID.toString());
        formData.append("email", this.user.email);
 
-       return this.httpClient.post<any>('https://localhost:44377/ChordProgressions/removesavedprogressions', formData).subscribe(       
+       return this.httpClient.post<any>('https://chordbankapi.azurewebsites.net/ChordProgressions/removesavedprogressions', formData).subscribe(       
         (res) => console.log(res),
         (err) => /*do nothing*/ err);
      }
